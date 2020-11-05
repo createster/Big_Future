@@ -7,24 +7,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
     public LoginPage(){
         PageFactory.initElements(Driver.get(), this);
     }
 
-    @FindBy (css = "#inputEmail")
+    @FindBy (id = "inputEmail")
     public WebElement userNameBox;
 
-    @FindBy (css = "#inputPassword")
+    @FindBy (id = "inputPassword")
     public WebElement passwordBox;
 
     @FindBy(xpath = "(//button[@type='submit'])")
     public WebElement submitButton;
 
+    @FindBy(xpath = "//*[text()='Dashboard']")
+    public  WebElement librarianTitle;
+
+    @FindBy(xpath = "//*[text()='Book Management']")
+    public WebElement studentTitle;
+
 
 
         public void login(String userNameStr, String passwordStr) {
-            BrowserUtils.waitFor(10);
 
             userNameBox.sendKeys(userNameStr);
             passwordBox.sendKeys(passwordStr);
