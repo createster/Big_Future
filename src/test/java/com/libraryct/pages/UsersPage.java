@@ -12,8 +12,6 @@ import java.util.List;
 
 public class UsersPage extends BasePage {
 
-    @FindBy(css = ".form-control.input-sm.input-xsmall.input-inline")
-    public WebElement recordDropdown;
 
     @FindBy(css = ".btn.btn-lg.btn-outline.btn-primary.btn-sm")
     public WebElement addUser;
@@ -36,11 +34,6 @@ public class UsersPage extends BasePage {
     @FindBy(xpath = "(//select[@name='status'])[1]")
     public WebElement status;
 
-    @FindBy(css = "[name='start_date']")
-    public WebElement startDate;
-
-    @FindBy(css = "[name='end_date']")
-    public WebElement endDate;
 
     @FindBy(xpath = "//button[contains(text(),'Save changes')]")
     public WebElement saveChanges;

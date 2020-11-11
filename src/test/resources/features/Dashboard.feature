@@ -1,14 +1,18 @@
 @modules
-Feature: User spesific modules
+Feature: User modules
 
 Background:
   Given the user is on the login page
-
-  Scenario Outline: Users see user spesific modules
-    When the user enter "<userType>" credentials
-    Then the user sees "<modules>"
-
-    Examples:
-      | userType  | modules                   |
-      | student   | Books - Borrowing Books   |
-      | librarian | Dashboard - Users - Books |
+@stu
+    Scenario: student module options
+      When user login as a "student"
+      Then student see the following <modules>
+        | Books           |
+        | Borrowing Books |
+@lib
+  Scenario: librarian module options
+    When user login as a "librarian"
+    Then librarian see the following <modules>
+      | Dashboard |
+      | Users     |
+      | Books     |

@@ -1,36 +1,24 @@
 package com.libraryct.pages;
 
+import com.libraryct.utilities.BrowserUtils;
 import com.libraryct.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class BasePage {
 
-    @FindBy(css = "#book_categories")
-    public WebElement categoriesDropdown;
+    @FindBy(xpath = "(//td)[5]")
+    public WebElement actualCategoryOnTheList;
 
-    @FindBy(xpath = "//*[@type='search']")
-    public WebElement searchButton;
 
-    @FindBy(xpath = "//thead//tr//th")
-    public List<WebElement> tableColumns;
-
-    @FindBy(css = "[id='navbarDropdown']")
-    public WebElement profileName;
-
-    @FindBy(xpath = "//ul[@class='navbar-nav mr-auto']//li")
+    @FindBy(xpath = "//span[@class='title']")
     public List<WebElement> modules;
 
-    @FindBy(xpath = "//span[contains(text(),'Dashboard')]")
-    public WebElement dashboardModule;
-
-    @FindBy(xpath = "//span[contains(text(),'Users')]")
-    public WebElement usersModule;
-
-    @FindBy(xpath = "//span[contains(text(),'Books')]")
-    public WebElement booksModule;
 
     @FindBy(css = ".nav-link.dropdown-toggle")
     public WebElement dataToggle;
@@ -38,6 +26,19 @@ public class BasePage {
     @FindBy(css=".dropdown-item")
     public  WebElement logOut;
 
+    public BasePage() { PageFactory.initElements(Driver.get(), this);}
+
+    public void navigateTo(String tab) {
+        String tabs="//span[contains(text(),'"+tab+"')]";
+        try{
+            BrowserUtils.waitForClickablility(By.xpath(tabs),5);
+            WebElement tabElement=Driver.get().findElement(By.xpath(tabs));
+            new Actions(Driver.get()).moveToElement(tabElement).pause(200).click().build().perform();
+        } catch (Exception e){
+            BrowserUtils.clickWithWait(By.xpath(tabs),5);
+        }
+
+    }
 
 
     public void logOut(){
